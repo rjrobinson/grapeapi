@@ -34,6 +34,19 @@ module Employee
       delete ':id' do
         EmpData.find(params[:id]).destroy!
       end
+
+      desc "update an employee address"
+      params do
+        requires :id, type: String
+        requires :address, type:String
+      end
+      
+      put ':id' do
+        EmpData.find(params[:id]).update({
+          address:params[:address]
+          })
+      end
+
     end
 
   end
