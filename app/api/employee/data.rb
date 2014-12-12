@@ -8,6 +8,32 @@ module Employee
         EmpData.all
       end
 
+      desc "create a new employee"
+      ## This takes care of parameter validation
+
+      params do
+        requires :name, type:String
+        requires :address, type:String
+        requires :age, type:Integer
+      end
+
+      post do
+        EmpData.create!({
+          name:params[:name],
+          address:params[:address],
+          age:params[:age]
+          })
+      end
+
+      desc "delete an employee"
+
+      params do
+        requires :id, type:String
+      end
+
+      delete ':id' do
+        EmpData.find(params[:id]).destroy!
+      end
     end
 
   end
